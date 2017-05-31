@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.hibernate.cfg.Environment;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -34,8 +35,10 @@ public class DataConfiguration {
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		vendorAdapter.setGenerateDdl(true);
 		Properties jpaProperties=new Properties();
-		jpaProperties.put("hibernate.hbm2ddl.auto", "create-drop");
-		jpaProperties.put("hibernate.dielect", "org.hibernate.dialect.HSQLDialect");
+		jpaProperties.put(Environment.HBM2DDL_AUTO, "create-drop");
+		jpaProperties.put(Environment.DIALECT, "org.hibernate.dialect.HSQLDialect");
+		jpaProperties.put(Environment.HBM2DDL_IMPORT_FILES, "import.sql");
+		
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setDataSource(dataSource());
 		factory.setPackagesToScan("com.david.springData.h2.model");
