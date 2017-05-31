@@ -1,8 +1,10 @@
 package com.david.springData.h2.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,19 +13,27 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="BOOK")
-public class Book {
+public class Book implements Serializable{
+ 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6597617299089538760L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long bookId;
 	
-	
+	@Column(name="TITLE")
 	private String title;
 	
+	@Column(name="PUBLISH_DATE")
 	private Date publishDate;
 	
+	@Column(name="PAGE_COUNT")
 	private int pageCount;
 	
+	@Column(name="PRICE")
 	private BigDecimal price;
 
 	
